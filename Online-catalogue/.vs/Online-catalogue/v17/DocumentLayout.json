@@ -1,14 +1,40 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Vlad\\Desktop\\Facultate\\anul_III\\MPI\\online-catalogue\\Online-catalogue\\",
+  "WorkspaceRootPath": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|c:\\users\\vlad\\desktop\\facultate\\anul_iii\\mpi\\online-catalogue\\online-catalogue\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|c:\\users\\sirbu\\onedrive\\desktop\\online-catalogue\\online-catalogue\\views\\adminadduserview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|solutionrelative:views\\adminadduserview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\views\\adminview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|solutionrelative:views\\adminview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|c:\\users\\sirbu\\onedrive\\desktop\\online-catalogue\\online-catalogue\\views\\adminview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|solutionrelative:views\\adminview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|c:\\users\\sirbu\\onedrive\\desktop\\online-catalogue\\online-catalogue\\views\\adminadduserview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|solutionrelative:views\\adminadduserview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|c:\\users\\vlad\\desktop\\facultate\\anul_iii\\mpi\\online-catalogue\\online-catalogue\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|Online-catalogue||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DB1F522-1092-48D7-88BF-D11C32A166E7}|Online-catalogue.csproj|c:\\users\\sirbu\\onedrive\\desktop\\online-catalogue\\online-catalogue\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,11 +44,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 5,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "adminAddUserView.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\Views\\adminAddUserView.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\adminAddUserView.xaml.cs",
+              "ToolTip": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\Views\\adminAddUserView.xaml.cs",
+              "RelativeToolTip": "Views\\adminAddUserView.xaml.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAQwCMAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-25T15:07:15.805Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "adminView.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\Views\\adminView.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\adminView.xaml.cs",
+              "ToolTip": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\Views\\adminView.xaml.cs",
+              "RelativeToolTip": "Views\\adminView.xaml.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAwwEMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-25T14:41:46.656Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -30,35 +78,67 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+              "Name": "ST:0:0:{131369f2-062d-44a2-8671-91ff31efb4f4}"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:3:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:3:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "adminAddUserView.xaml",
+              "DocumentMoniker": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\Views\\adminAddUserView.xaml",
+              "RelativeDocumentMoniker": "Views\\adminAddUserView.xaml",
+              "ToolTip": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\Views\\adminAddUserView.xaml",
+              "RelativeToolTip": "Views\\adminAddUserView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-25T14:40:40.645Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
+              "Title": "Online-catalogue",
+              "DocumentMoniker": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\Online-catalogue.csproj",
+              "RelativeDocumentMoniker": "Online-catalogue.csproj",
+              "ToolTip": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\Online-catalogue.csproj",
+              "RelativeToolTip": "Online-catalogue.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-25T13:55:44.46Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\App.xaml",
+              "RelativeDocumentMoniker": "App.xaml",
+              "ToolTip": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\App.xaml",
+              "RelativeToolTip": "App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-25T13:51:51.369Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "adminView.xaml",
+              "DocumentMoniker": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\Views\\adminView.xaml",
+              "RelativeDocumentMoniker": "Views\\adminView.xaml",
+              "ToolTip": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\Views\\adminView.xaml",
+              "RelativeToolTip": "Views\\adminView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-25T13:43:47.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\Vlad\\Desktop\\Facultate\\anul_III\\MPI\\online-catalogue\\Online-catalogue\\MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MainWindow.xaml",
-              "ToolTip": "C:\\Users\\Vlad\\Desktop\\Facultate\\anul_III\\MPI\\online-catalogue\\Online-catalogue\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\MainWindow.xaml",
               "RelativeToolTip": "MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-03-25T13:29:32.566Z",
@@ -66,42 +146,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Vlad\\Desktop\\Facultate\\anul_III\\MPI\\online-catalogue\\Online-catalogue\\MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\Vlad\\Desktop\\Facultate\\anul_III\\MPI\\online-catalogue\\Online-catalogue\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\sirbu\\OneDrive\\Desktop\\online-catalogue\\Online-catalogue\\MainWindow.xaml.cs",
               "RelativeToolTip": "MainWindow.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T13:29:32.193Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 205,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "WhenOpened": "2025-03-25T13:29:32.193Z"
             }
           ]
         }
