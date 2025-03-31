@@ -23,6 +23,8 @@ namespace Online_catalogue.Views
         public adminView()
         {
             InitializeComponent();
+            DatabaseService dbService = new DatabaseService();
+            dbService.TestConnection();
         }
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
