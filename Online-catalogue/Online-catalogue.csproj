@@ -102,10 +102,11 @@
     <Compile Include="Views\adminView.xaml.cs">
       <DependentUpon>adminView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LoginView.xaml.cs">
-      <DependentUpon>LoginView.xaml</DependentUpon>
     <Compile Include="Views\courseDetailView.xaml.cs">
       <DependentUpon>courseDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\teacherHomeView.xaml.cs">
       <DependentUpon>teacherHomeView.xaml</DependentUpon>
@@ -137,8 +138,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LoginView.xaml">
     <Page Include="Views\courseDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

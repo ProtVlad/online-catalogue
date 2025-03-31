@@ -21,4 +21,31 @@ public class DatabaseService
             MessageBox.Show($"Eroare: {ex.Message}", "Eroare", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
+    public string AuthenticateUser(string email, string password)
+    {
+        using (var connection = new NpgsqlConnection(connectionString))
+        {
+            connection.Open();
+            string query = "SELECT parola, rol FROM users WHERE email = @Email";
+
+            using (var command = new NpgsqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@Email", email);
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        string storedPassword = reader.GetString(0);
+                        string role = reader.GetString(1);
+
+                        if (password == storedPassword)
+                        {
+                            return role;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
 }
