@@ -1,0 +1,7 @@
+.vs/
+bin/
+obj/
+
+Online-catalogue/obj
+Online-catalogue/.vs/Online-catalogue
+Online-catalogue/Debug
