@@ -102,6 +102,8 @@
     <Compile Include="Views\adminView.xaml.cs">
       <DependentUpon>adminView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     <Compile Include="Views\courseDetailView.xaml.cs">
       <DependentUpon>courseDetailView.xaml</DependentUpon>
     </Compile>
@@ -135,6 +137,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\LoginView.xaml">
     <Page Include="Views\courseDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -177,9 +180,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include=".gitignore" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
