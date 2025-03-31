@@ -25,5 +25,24 @@ namespace Online_catalogue.Views
             DatabaseService dbService = new DatabaseService();
             dbService.TestConnection();
         }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            string email = EmailTextBox.Text;
+            string password = PasswordBox.Password;
+
+            DatabaseService dbService = new DatabaseService();
+            string userRole = dbService.AuthenticateUser(email, password);
+
+            if (userRole != null) // Dacă autentificarea reușește
+            {
+                MessageBox.Show($"Autentificare reușită!\nRol: {userRole}", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close(); // Poți deschide o nouă fereastră aici
+            }
+            else
+            {
+                MessageBox.Show("Email sau parolă incorectă!", "Eroare", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

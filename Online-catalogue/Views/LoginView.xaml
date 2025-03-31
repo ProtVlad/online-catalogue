@@ -20,12 +20,12 @@
             <TextBox x:Name="EmailTextBox" Margin="5"/>
 
             <!-- Câmp pentru Password -->
-            <Label Content="Password:"/>
+            <Label Content="Parola:"/>
             <PasswordBox x:Name="PasswordBox" Margin="5"/>
 
             <!-- Butonul Login -->
             <Button Content="Login" Width="100" Height="30" HorizontalAlignment="Center" Margin="10"
-                    Background="#3498db" Foreground="White" BorderBrush="#2980b9" BorderThickness="1">
+                    Click="LoginButton_Click">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="#3498db"/>
