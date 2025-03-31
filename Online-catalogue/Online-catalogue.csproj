@@ -92,6 +92,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Curs.cs" />
+    <Compile Include="Models\Nota.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="ViewModels\DatabaseService..cs" />
     <Compile Include="Views\adminAddUserView.xaml.cs">
       <DependentUpon>adminAddUserView.xaml</DependentUpon>
@@ -147,9 +150,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include=".gitignore" />
   </ItemGroup>
