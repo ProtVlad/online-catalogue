@@ -92,6 +92,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Curs.cs" />
+    <Compile Include="Models\Nota.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="ViewModels\DatabaseService..cs" />
     <Compile Include="Views\addCourseView.xaml.cs">
       <DependentUpon>addCourseView.xaml</DependentUpon>
