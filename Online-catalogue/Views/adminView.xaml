@@ -8,7 +8,6 @@
         Background="LightGray">
 
     <Window.Resources>
-
         <Style x:Key="StyledButton" TargetType="Button">
             <Setter Property="Background" Value="#3498db"/>
             <Setter Property="Foreground" Value="White"/>
@@ -35,16 +34,18 @@
                     Style="{StaticResource StyledButton}"
                     Click="AddUser_Click"/>
 
+            <!-- Setăm înălțimea DataGrid-ului și activăm doar scroll-ul vertical -->
             <DataGrid x:Name="UsersDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column"
                       CanUserAddRows="False" Background="White"
                       HorizontalGridLinesBrush="#ddd" VerticalGridLinesBrush="#ddd"
-                      Foreground="Black" Margin="0,10,0,0">
+                      Foreground="Black" Margin="0,10,0,0" Height="300" 
+                      VerticalScrollBarVisibility="Auto">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding id}" Width="50"/>
-                    <DataGridTextColumn Header="Nume" Binding="{Binding lastName}" Width="*"/>
-                    <DataGridTextColumn Header="Prenume" Binding="{Binding firstName}" Width="*"/>
-                    <DataGridTextColumn Header="Rol" Binding="{Binding role}" Width="*"/>
-                    <DataGridTextColumn Header="Email" Binding="{Binding email}" Width="*"/>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                    <DataGridTextColumn Header="Nume" Binding="{Binding Nume}" Width="*"/>
+                    <DataGridTextColumn Header="Prenume" Binding="{Binding Prenume}" Width="*"/>
+                    <DataGridTextColumn Header="Rol" Binding="{Binding Rol}" Width="*"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
 
                     <DataGridTemplateColumn Header="Actiuni" Width="160">
                         <DataGridTemplateColumn.CellTemplate>

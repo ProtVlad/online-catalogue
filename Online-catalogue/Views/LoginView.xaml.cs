@@ -37,7 +37,9 @@ namespace Online_catalogue.Views
             if (userRole != null) // Dacă autentificarea reușește
             {
                 MessageBox.Show($"Autentificare reușită!\nRol: {userRole}", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
+                adminView adminView = new adminView();
                 this.Close(); // Poți deschide o nouă fereastră aici
+                adminView.ShowDialog();
             }
             else
             {
