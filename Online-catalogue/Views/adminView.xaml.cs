@@ -1,4 +1,5 @@
-﻿using Online_catalogue.Views;
+﻿using Online_catalogue.Models;
+using Online_catalogue.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,51 +24,73 @@ namespace Online_catalogue.Views
         public adminView()
         {
             InitializeComponent();
+            LoadUsers();  // Adaugă această linie pentru a încărca utilizatorii
+        }
+
+        private void LoadUsers()
+        {
+            DatabaseService dbService = new DatabaseService();
+            List<User> users = dbService.GetUsers();
+            UsersDataGrid.ItemsSource = users;
         }
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
              adminAddUserView adminAddUserView = new adminAddUserView();
+            this.Close();
             adminAddUserView.ShowDialog();
         }
 
         private void EditUser_Click(object sender, RoutedEventArgs e)
         {
-            //if (UsersDataGrid.SelectedItem is User selectedUser)
-            //{
-            //    EditUserWindow editWindow = new EditUserWindow(selectedUser);
-            //    editWindow.ShowDialog();
+            if (UsersDataGrid.SelectedItem is User selectedUser)
+            {
+                adminEditUserView editWindow = new adminEditUserView(selectedUser);
+                editWindow.ShowDialog();
 
-            //    LoadUsers();
-            //}
-
-            //cred ca putem folosi si adminAddUserView
+                // Reîncarcă utilizatorii după editare
+                LoadUsers();
+            }
+            else
+            {
+                MessageBox.Show("Te rog selectează un utilizator pentru a-l edita.", "Eroare", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void DeleteUser_Click(object sender, RoutedEventArgs e)
         {
-            //if (UsersDataGrid.SelectedItem is User selectedUser)
-            //{
-            //    MessageBoxResult result = MessageBox.Show($"Sigur vrei să ștergi utilizatorul {selectedUser.LastName}?",
-            //                                              "Confirmare ștergere",
-            //                                              MessageBoxButton.YesNo,
-            //                                              MessageBoxImage.Warning);
+            if (UsersDataGrid.SelectedItem is User selectedUser)
+            {
+                // Confirmare înainte de a șterge
+                MessageBoxResult result = MessageBox.Show($"Sigur vrei să ștergi utilizatorul {selectedUser.Nume} {selectedUser.Prenume}?",
+                                                          "Confirmare ștergere",
+                                                          MessageBoxButton.YesNo,
+                                                          MessageBoxImage.Warning);
 
-            //    if (result == MessageBoxResult.Yes)
-            //    {
-            //        DeleteUser(selectedUser.Id);
+                if (result == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        // Ștergerea din baza de date
+                        DatabaseService dbService = new DatabaseService();
+                        dbService.DeleteUser(selectedUser.Id);
 
-            //        LoadUsers();
-            //    }
-            //}
+                        // Reîncarcă utilizatorii pentru a reflecta ștergerea
+                        LoadUsers();
+
+                        MessageBox.Show("Utilizatorul a fost șters cu succes!", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Eroare la ștergere: {ex.Message}", "Eroare", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Te rog selectează un utilizator pentru a-l șterge.", "Eroare", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-
-        // Metoda care șterge utilizatorul din baza de date
-        private void DeleteUser(int userId)
-        {
-           // Users.Remove(Users.FirstOrDefault(u => u.Id == userId));
-        }
-
 
     }
 }

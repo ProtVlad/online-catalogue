@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Online_catalogue.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,19 +17,29 @@ using System.Windows.Shapes;
 namespace Online_catalogue.Views
 {
     /// <summary>
-    /// Interaction logic for adminAddUserView.xaml
+    /// Interaction logic for adminEditUserView.xaml
     /// </summary>
-    public partial class adminAddUserView : Window
+    public partial class adminEditUserView : Window
     {
-        public adminAddUserView()
+        private User _selectedUser;
+
+        public adminEditUserView(User user)
         {
             InitializeComponent();
+
+            // Inițializare câmpuri cu datele utilizatorului selectat
+            _selectedUser = user;
+
+            LastNameTextBox.Text = _selectedUser.Nume;
+            FirstNameTextBox.Text = _selectedUser.Prenume;
+            RoleComboBox.SelectedItem = RoleComboBox.Items.OfType<ComboBoxItem>().FirstOrDefault(item => item.Content.ToString() == _selectedUser.Rol);
+            EmailTextBox.Text = _selectedUser.Email;
+            PasswordBox.Password = _selectedUser.Parola;
         }
-
-
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            // Validarea câmpurilor
             if (string.IsNullOrEmpty(LastNameTextBox.Text) ||
                 string.IsNullOrEmpty(FirstNameTextBox.Text) ||
                 RoleComboBox.SelectedItem == null ||
@@ -48,36 +59,25 @@ namespace Online_catalogue.Views
                 return;
             }
 
-            string nume = LastNameTextBox.Text;
-            string prenume = FirstNameTextBox.Text;
-            string rol = ((ComboBoxItem)RoleComboBox.SelectedItem).Content.ToString();
-            string parola = PasswordBox.Password;
-            DateTime createdAt = DateTime.Now;
+            _selectedUser.Nume = LastNameTextBox.Text;
+            _selectedUser.Prenume = FirstNameTextBox.Text;
+            _selectedUser.Rol = ((ComboBoxItem)RoleComboBox.SelectedItem).Content.ToString();
+            _selectedUser.Email = EmailTextBox.Text;
+            _selectedUser.Parola = PasswordBox.Password;
 
             try
             {
                 DatabaseService db = new DatabaseService();
-                db.InsertUser(nume, prenume, rol, email, parola, createdAt);
+                db.UpdateUser(_selectedUser);
 
-                MessageBox.Show("Utilizator adăugat cu succes!", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Utilizatorul a fost actualizat cu succes!", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Eroare la salvare în baza de date:\n{ex.Message}", "Eroare", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Eroare la actualizarea utilizatorului:\n{ex.Message}", "Eroare", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            // Dacă totul este în regulă, închide fereastra
-            this.Close();
         }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            // Deschidem fereastra de Admin după ce se închide fereastra curentă
-            adminView adminViewWindow = new adminView();
-            adminViewWindow.Show();  // Deschide fereastra adminView
-        }
-
     }
 
 }

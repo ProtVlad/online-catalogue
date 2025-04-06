@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using Npgsql;
+using Online_catalogue.Models;
 
 public class DatabaseService
 {
@@ -104,5 +106,96 @@ public class DatabaseService
             }
         }
         return null;
+    }
+
+    public void InsertUser(string nume, string prenume, string rol, string email, string parola, DateTime createdAt)
+    {
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "INSERT INTO users (nume, prenume, rol, email, parola, created_at) " +
+                           "VALUES (@nume, @prenume, @rol, @email, @parola, @createdAt)";
+
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@nume", nume);
+                cmd.Parameters.AddWithValue("@prenume", prenume);
+                cmd.Parameters.AddWithValue("@rol", rol);
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@parola", parola);
+                cmd.Parameters.AddWithValue("@createdAt", createdAt);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
+    public List<User> GetUsers()
+    {
+        List<User> users = new List<User>();
+
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "SELECT id, nume, prenume, rol, parola, email FROM users"; // Modificat pentru a include parola
+
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        users.Add(new User
+                        {
+                            Id = reader.GetInt32(0), // id
+                            Nume = reader.GetString(1), // last_name -> Nume
+                            Prenume = reader.GetString(2), // first_name -> Prenume
+                            Rol = reader.GetString(3), // role -> Rol
+                            Parola = reader.GetString(4), // password -> Parola
+                            Email = reader.GetString(5) // email -> Email
+                        });
+                    }
+                }
+            }
+        }
+
+        return users;
+    }
+
+    public void UpdateUser(User user)
+    {
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "UPDATE users SET nume = @LastName, prenume = @FirstName, rol = @Role, email = @Email, parola = @Password WHERE id = @Id";
+
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@Id", user.Id);
+                cmd.Parameters.AddWithValue("@LastName", user.Nume);
+                cmd.Parameters.AddWithValue("@FirstName", user.Prenume);
+                cmd.Parameters.AddWithValue("@Role", user.Rol);
+                cmd.Parameters.AddWithValue("@Email", user.Email);
+                cmd.Parameters.AddWithValue("@Password", user.Parola);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
+
+    public void DeleteUser(int userId)
+    {
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "DELETE FROM users WHERE id = @id";
+
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("id", userId);
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

@@ -102,6 +102,9 @@
     <Compile Include="Views\adminAddUserView.xaml.cs">
       <DependentUpon>adminAddUserView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\adminEditUserView.xaml.cs">
+      <DependentUpon>adminEditUserView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\adminView.xaml.cs">
       <DependentUpon>adminView.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\adminAddUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\adminEditUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -192,8 +199,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
