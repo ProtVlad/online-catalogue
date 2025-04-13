@@ -42,7 +42,8 @@ namespace Online_catalogue.Views
             // Validarea câmpurilor
             if (string.IsNullOrEmpty(LastNameTextBox.Text) ||
                 string.IsNullOrEmpty(FirstNameTextBox.Text) ||
-                RoleComboBox.SelectedItem == null ||
+                RoleComboBox.SelectedItem == null &&
+                _selectedUser.Rol.ToLower() != "admin" ||  // Acceptă null doar pentru admin
                 string.IsNullOrEmpty(EmailTextBox.Text) ||
                 string.IsNullOrEmpty(PasswordBox.Password))
             {
@@ -59,9 +60,27 @@ namespace Online_catalogue.Views
                 return;
             }
 
+            // Verificare modificare rol admin
+            string rolNou = RoleComboBox.SelectedItem != null
+                ? ((ComboBoxItem)RoleComboBox.SelectedItem).Content.ToString()
+                : "";
+
+            if (_selectedUser.Rol.ToLower() == "admin")
+            {
+                if (string.IsNullOrWhiteSpace(rolNou))
+                {
+                    rolNou = "admin"; // Nu s-a ales nimic → păstrăm admin
+                }
+                else if (rolNou.ToLower() != "admin")
+                {
+                    MessageBox.Show("Nu poți modifica rolul unui utilizator cu rolul ADMIN!", "Acțiune interzisă", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+
             _selectedUser.Nume = LastNameTextBox.Text;
             _selectedUser.Prenume = FirstNameTextBox.Text;
-            _selectedUser.Rol = ((ComboBoxItem)RoleComboBox.SelectedItem).Content.ToString();
+            _selectedUser.Rol = rolNou;
             _selectedUser.Email = EmailTextBox.Text;
             _selectedUser.Parola = PasswordBox.Password;
 
@@ -78,6 +97,7 @@ namespace Online_catalogue.Views
                 MessageBox.Show($"Eroare la actualizarea utilizatorului:\n{ex.Message}", "Eroare", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
     }
 
 }
