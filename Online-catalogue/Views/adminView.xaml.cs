@@ -61,21 +61,28 @@ namespace Online_catalogue.Views
         {
             if (UsersDataGrid.SelectedItem is User selectedUser)
             {
-                // Confirmare înainte de a șterge
-                MessageBoxResult result = MessageBox.Show($"Sigur vrei să ștergi utilizatorul {selectedUser.Nume} {selectedUser.Prenume}?",
-                                                          "Confirmare ștergere",
-                                                          MessageBoxButton.YesNo,
-                                                          MessageBoxImage.Warning);
+                // Nu permite ștergerea adminului
+                if (selectedUser.Rol.ToLower() == "admin")
+                {
+                    MessageBox.Show("Nu poți șterge un utilizator cu rolul de ADMIN!", "Acțiune interzisă", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                // Confirmare ștergere pentru ceilalți utilizatori
+                MessageBoxResult result = MessageBox.Show(
+                    $"Sigur vrei să ștergi utilizatorul {selectedUser.Nume} {selectedUser.Prenume}?",
+                    "Confirmare ștergere",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning
+                );
 
                 if (result == MessageBoxResult.Yes)
                 {
                     try
                     {
-                        // Ștergerea din baza de date
                         DatabaseService dbService = new DatabaseService();
                         dbService.DeleteUser(selectedUser.Id);
 
-                        // Reîncarcă utilizatorii pentru a reflecta ștergerea
                         LoadUsers();
 
                         MessageBox.Show("Utilizatorul a fost șters cu succes!", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
