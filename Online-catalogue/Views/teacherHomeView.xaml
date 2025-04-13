@@ -26,11 +26,36 @@
     </Window.Resources>
 
     <Grid Margin="20">
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+        <StackPanel Orientation="Vertical">
+
+            <!-- Rând 1: Bun venit stânga, resetare parolă dreapta -->
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="WelcomeTextBlock"
+                           FontSize="16"
+                           FontWeight="SemiBold"
+                           Foreground="Black"
+                           VerticalAlignment="Center"
+                           Text="Bun venit, ..." />
+
+                <Button Content="Resetare parolă"
+                        Width="140" Height="30"
+                        Style="{StaticResource StyledButton}"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        Click="ResetPassword_Click" />
+            </Grid>
+
+            <!-- Titlu central -->
             <TextBlock Text="Profesor - Vizualizare cursuri"
                        FontSize="22" FontWeight="Bold" Foreground="Black"
                        HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
+            <!-- Butoane -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Content="Adaugă Curs" Width="120" Height="35"
                         Style="{StaticResource StyledButton}"
@@ -40,6 +65,7 @@
                         Click="ViewAllStudents_Click"/>
             </StackPanel>
 
+            <!-- Lista cursuri -->
             <ItemsControl ItemsSource="{Binding Courses}" Margin="0,10,0,0">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

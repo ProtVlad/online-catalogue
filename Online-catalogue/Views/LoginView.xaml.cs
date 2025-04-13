@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Online_catalogue.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,14 +33,28 @@ namespace Online_catalogue.Views
             string password = PasswordBox.Password;
 
             DatabaseService dbService = new DatabaseService();
-            string userRole = dbService.AuthenticateUser(email, password);
+            User loggedUser = dbService.AuthenticateUser(email, password);
 
-            if (userRole != null) // Dacă autentificarea reușește
+            if (loggedUser != null)
             {
-                MessageBox.Show($"Autentificare reușită!\nRol: {userRole}", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
-                adminView adminView = new adminView();
-                this.Close(); // Poți deschide o nouă fereastră aici
-                adminView.ShowDialog();
+                MessageBox.Show($"Autentificare reușită!\nRol: {loggedUser.Rol}", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                switch (loggedUser.Rol.ToLower())
+                {
+                    case "admin":
+                        adminView adminView = new adminView();
+                        this.Close();
+                        adminView.ShowDialog();
+                        break;
+                    case "profesor":
+                        teacherHomeView teacherHomeView = new teacherHomeView(loggedUser); // trimitem user-ul aici
+                        this.Close();
+                        teacherHomeView.ShowDialog();
+                        break;
+                    case "elev":
+                        //new studentView(loggedUser).ShowDialog();
+                        break;
+                }
             }
             else
             {
