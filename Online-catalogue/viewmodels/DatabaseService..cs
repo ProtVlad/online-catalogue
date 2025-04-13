@@ -80,33 +80,43 @@ public class DatabaseService
             MessageBox.Show($"Eroare: {ex.Message}", "Eroare", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
-    public string AuthenticateUser(string email, string password)
+    public User AuthenticateUser(string email, string password)
     {
         using (var connection = new NpgsqlConnection(connectionString))
         {
             connection.Open();
-            string query = "SELECT parola, rol FROM users WHERE email = @Email";
+            string query = "SELECT id, nume, prenume, email, parola, rol FROM users WHERE email = @Email";
 
             using (var command = new NpgsqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Email", email);
+
                 using (var reader = command.ExecuteReader())
                 {
                     if (reader.Read())
                     {
-                        string storedPassword = reader.GetString(0);
-                        string role = reader.GetString(1);
+                        string storedPassword = reader.GetString(reader.GetOrdinal("parola"));
 
                         if (password == storedPassword)
                         {
-                            return role;
+                            return new User
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("id")),
+                                Nume = reader.GetString(reader.GetOrdinal("nume")),
+                                Prenume = reader.GetString(reader.GetOrdinal("prenume")),
+                                Email = reader.GetString(reader.GetOrdinal("email")),
+                                Parola = storedPassword,
+                                Rol = reader.GetString(reader.GetOrdinal("rol"))
+                            };
                         }
                     }
                 }
             }
         }
+
         return null;
     }
+
 
     public void InsertUser(string nume, string prenume, string rol, string email, string parola, DateTime createdAt)
     {
@@ -195,6 +205,22 @@ public class DatabaseService
             {
                 cmd.Parameters.AddWithValue("id", userId);
                 cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
+    public void UpdateUserPassword(int userId, string newPassword)
+    {
+        using (var connection = new NpgsqlConnection(connectionString))
+        {
+            connection.Open();
+            string query = "UPDATE users SET parola = @Password WHERE id = @UserId";
+
+            using (var command = new NpgsqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@Password", newPassword);
+                command.Parameters.AddWithValue("@UserId", userId);
+                command.ExecuteNonQuery();
             }
         }
     }

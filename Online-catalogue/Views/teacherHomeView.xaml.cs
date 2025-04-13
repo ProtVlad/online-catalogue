@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Online_catalogue.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,10 +21,13 @@ namespace Online_catalogue.Views
     /// </summary>
     public partial class teacherHomeView : Window
     {
+        private User LoggedInUser { get; set; }
         public ObservableCollection<Course> Courses { get; set; }
-        public teacherHomeView()
+        public teacherHomeView(User user)
         {
             InitializeComponent();
+            LoggedInUser = user;
+            WelcomeTextBlock.Text = $"Bun venit, {LoggedInUser.Nume} {LoggedInUser.Prenume}!";
         }
 
         private void AddCourse_Click(object sender, RoutedEventArgs e)
@@ -47,6 +51,11 @@ namespace Online_catalogue.Views
                 courseDetailView courseDetailsWindow = new courseDetailView();
                 courseDetailsWindow.ShowDialog();
             }
+        }
+        private void ResetPassword_Click(object sender, RoutedEventArgs e)
+        {
+            var resetWindow = new ResetPasswordView(LoggedInUser);
+            resetWindow.ShowDialog();
         }
     }
     public class Course
