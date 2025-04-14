@@ -1,25 +1,19 @@
 ﻿using Online_catalogue.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Online_catalogue.Views
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    /// Fereastra de autentificare pentru utilizatori.
+    /// Aceasta permite autentificarea utilizatorilor pe baza unui email și a unei parole.
     /// </summary>
     public partial class LoginView : Window
     {
+        /// <summary>
+        /// Constructorul clasei LoginView.
+        /// Initializează componentele și testează conexiunea la baza de date.
+        /// </summary>
         public LoginView()
         {
             InitializeComponent();
@@ -27,6 +21,12 @@ namespace Online_catalogue.Views
             dbService.TestConnection();
         }
 
+        /// <summary>
+        /// Evenimentul pentru butonul de login.
+        /// Verifică dacă email-ul și parola sunt corecte și redirecționează utilizatorul în funcție de rol.
+        /// </summary>
+        /// <param name="sender">Obiectul care a declanșat evenimentul.</param>
+        /// <param name="e">Datele evenimentului.</param>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             string email = EmailTextBox.Text;
@@ -39,6 +39,7 @@ namespace Online_catalogue.Views
             {
                 MessageBox.Show($"Autentificare reușită!\nRol: {loggedUser.Rol}", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
 
+                // Se verifică rolul utilizatorului și se deschide fereastra corespunzătoare
                 switch (loggedUser.Rol.ToLower())
                 {
                     case "admin":
@@ -65,5 +66,3 @@ namespace Online_catalogue.Views
         }
     }
 }
-
-//nici asa nou clonat nu vrea
