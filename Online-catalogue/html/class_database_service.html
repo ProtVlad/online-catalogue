@@ -108,19 +108,15 @@ $(function(){initNavTree('class_database_service.html',''); initResizable(true);
   <div class="headertitle"><div class="title">DatabaseService Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Serviciu al bazei de date.  
- <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac979775e4a4746226c316a826a585238" id="r_ac979775e4a4746226c316a826a585238"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac979775e4a4746226c316a826a585238">TestConnection</a> ()</td></tr>
-<tr class="memdesc:ac979775e4a4746226c316a826a585238"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testeazã conexiunea la baza de date.  <br /></td></tr>
 <tr class="separator:ac979775e4a4746226c316a826a585238"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71fbf1989e3254a222d76a787d6d3aa5" id="r_a71fbf1989e3254a222d76a787d6d3aa5"><td class="memItemLeft" align="right" valign="top">User&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71fbf1989e3254a222d76a787d6d3aa5">AuthenticateUser</a> (string email, string password)</td></tr>
 <tr class="separator:a71fbf1989e3254a222d76a787d6d3aa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b73e565cd9f611f5ae2c7484fef997c" id="r_a3b73e565cd9f611f5ae2c7484fef997c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b73e565cd9f611f5ae2c7484fef997c">InsertUser</a> (string nume, string prenume, string rol, string email, string parola, DateTime createdAt)</td></tr>
-<tr class="separator:a3b73e565cd9f611f5ae2c7484fef997c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4341576f7717566d2888374fba108e7a" id="r_a4341576f7717566d2888374fba108e7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4341576f7717566d2888374fba108e7a">InsertUser</a> (string nume, string prenume, string rol, string email, string parola)</td></tr>
+<tr class="separator:a4341576f7717566d2888374fba108e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad951642fb3c7a1a022cffcdc7b3217a6" id="r_ad951642fb3c7a1a022cffcdc7b3217a6"><td class="memItemLeft" align="right" valign="top">List&lt; User &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad951642fb3c7a1a022cffcdc7b3217a6">GetUsers</a> ()</td></tr>
 <tr class="separator:ad951642fb3c7a1a022cffcdc7b3217a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22aadf208988db8e761cbce0315b7272" id="r_a22aadf208988db8e761cbce0315b7272"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a22aadf208988db8e761cbce0315b7272">UpdateUser</a> (User user)</td></tr>
@@ -146,9 +142,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ada03cf2ff5f5e212f4314fd6c6e7fa26" id="r_ada03cf2ff5f5e212f4314fd6c6e7fa26"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada03cf2ff5f5e212f4314fd6c6e7fa26">GetCourseNameById</a> (int courseId)</td></tr>
 <tr class="separator:ada03cf2ff5f5e212f4314fd6c6e7fa26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Serviciu al bazei de date. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="abcd0812b9dc05b24b50a936b100e5e28" name="abcd0812b9dc05b24b50a936b100e5e28"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abcd0812b9dc05b24b50a936b100e5e28">&#9670;&#160;</a></span>AddNota()</h2>
 
@@ -432,8 +426,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3b73e565cd9f611f5ae2c7484fef997c" name="a3b73e565cd9f611f5ae2c7484fef997c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b73e565cd9f611f5ae2c7484fef997c">&#9670;&#160;</a></span>InsertUser()</h2>
+<a id="a4341576f7717566d2888374fba108e7a" name="a4341576f7717566d2888374fba108e7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4341576f7717566d2888374fba108e7a">&#9670;&#160;</a></span>InsertUser()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -464,12 +458,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>parola</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">DateTime</td>          <td class="paramname"><span class="paramname"><em>createdAt</em></span>&#160;)</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>parola</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -503,8 +492,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Testeazã conexiunea la baza de date. </p>
 
 </div>
 </div>

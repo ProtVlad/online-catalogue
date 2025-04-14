@@ -11,7 +11,7 @@ var class_database_service =
     [ "GetNotesForStudent", "class_database_service.html#a6f09d9a60b45586164410c6d23b0d7cb", null ],
     [ "GetUsers", "class_database_service.html#ad951642fb3c7a1a022cffcdc7b3217a6", null ],
     [ "GetUsersByCourseId", "class_database_service.html#a084c2b0ab4c3bca970827bb72a3481b7", null ],
-    [ "InsertUser", "class_database_service.html#a3b73e565cd9f611f5ae2c7484fef997c", null ],
+    [ "InsertUser", "class_database_service.html#a4341576f7717566d2888374fba108e7a", null ],
     [ "TestConnection", "class_database_service.html#ac979775e4a4746226c316a826a585238", null ],
     [ "UpdateUser", "class_database_service.html#a22aadf208988db8e761cbce0315b7272", null ],
     [ "UpdateUserPassword", "class_database_service.html#a93c5b3034f8bd21729e720966d4c7471", null ]

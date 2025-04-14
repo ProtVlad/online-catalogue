@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['insertuser_0',['InsertUser',['../class_database_service.html#a3b73e565cd9f611f5ae2c7484fef997c',1,'DatabaseService']]]
+  ['insertuser_0',['InsertUser',['../class_database_service.html#a4341576f7717566d2888374fba108e7a',1,'DatabaseService']]]
 ];
