@@ -23,7 +23,6 @@
 	<Grid Margin="20">
 		<StackPanel Orientation="Vertical">
 
-			<!-- Rând 1: Bun venit stânga, resetare parolă dreapta -->
 			<Grid Margin="0,0,0,20">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*" />
@@ -45,12 +44,10 @@
                         Click="ResetPassword_Click" />
 			</Grid>
 
-			<!-- Titlu central -->
 			<TextBlock Text="Student - Vizualizare Cursuri"
                        FontSize="22" FontWeight="Bold" Foreground="Black"
                        HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
-			<!-- Media generală -->
 			<TextBlock FontSize="16" FontWeight="SemiBold" Foreground="DarkBlue">
 				<Run Text="Media generală: "/>
 				<Run Text="{Binding MediaGenerala, StringFormat=F2}" />
