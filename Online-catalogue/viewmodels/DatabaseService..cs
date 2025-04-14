@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Contexts;
 using System.Windows;
 using Npgsql;
 using Online_catalogue.Models;
@@ -353,7 +354,7 @@ public class DatabaseService
         using (var conn = new NpgsqlConnection(connectionString))
         {
             conn.Open();
-            string query = "SELECT id, nume_curs, descriere FROM curs"; 
+            string query = "SELECT id, nume_curs, descriere FROM curs";
 
             using (var cmd = new NpgsqlCommand(query, conn))
             {
@@ -363,9 +364,9 @@ public class DatabaseService
                     {
                         courses.Add(new Curs
                         {
-                            Id = reader.GetInt32(0),           
-                            NumeCurs = reader.GetString(1),     
-                            Descriere = reader.GetString(2)   
+                            Id = reader.GetInt32(0),
+                            NumeCurs = reader.GetString(1),
+                            Descriere = reader.IsDBNull(2) ? null : reader.GetString(2)
                         });
                     }
                 }
@@ -374,6 +375,7 @@ public class DatabaseService
 
         return courses;
     }
+
 
     public string GetCourseName(int cursId)
     {
@@ -387,12 +389,46 @@ public class DatabaseService
                 cmd.Parameters.AddWithValue("@Id", cursId);
 
                 var result = cmd.ExecuteScalar();
-                return result?.ToString();  // Returneaz� numele cursului
+                return result?.ToString(); 
             }
         }
     }
 
-   
+
+    public List<Nota> GetNotesForStudent(int studentId)
+    {
+        List<Nota> notes = new List<Nota>();
+
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "SELECT id, id_user, id_curs, nota FROM nota WHERE id_user = @studentId";
+
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@studentId", studentId);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        notes.Add(new Nota
+                        {
+                            Id = reader.GetInt32(0),
+                            IdUser = reader.GetInt32(1),
+                            IdCurs = reader.GetInt32(2),
+                            NotaValoare = reader.GetInt32(3)
+                        });
+                    }
+                }
+            }
+        }
+
+        return notes;
+    }
+
+
+
 
 
 }

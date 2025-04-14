@@ -52,7 +52,9 @@ namespace Online_catalogue.Views
                         teacherHomeView.ShowDialog();
                         break;
                     case "elev":
-                        //new studentView(loggedUser).ShowDialog();
+                        studentHomeView studentHomeView = new studentHomeView(loggedUser);
+                        this.Close();
+                        studentHomeView.ShowDialog();
                         break;
                 }
             }
