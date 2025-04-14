@@ -73,6 +73,24 @@ public class DatabaseService
                     cmd.ExecuteNonQuery();
                 }
 
+                string checkUsersQuery = "SELECT COUNT(*) FROM users;";
+                using (var checkCmd = new NpgsqlCommand(checkUsersQuery, conn))
+                {
+                    var userCount = (long)checkCmd.ExecuteScalar();
+                    if (userCount == 0)
+                    {
+                        string insertAdminQuery = @"
+                            INSERT INTO users (nume, prenume, rol, parola, email)
+                            VALUES ('Admin', 'Principal', 'admin', 'admin123', 'admin@example.com');";
+
+                        using (var insertCmd = new NpgsqlCommand(insertAdminQuery, conn))
+                        {
+                            insertCmd.ExecuteNonQuery();
+                        }
+
+                    }
+                }
+
                 MessageBox.Show("Conexiune reusita!", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
@@ -389,7 +407,7 @@ public class DatabaseService
                 cmd.Parameters.AddWithValue("@Id", cursId);
 
                 var result = cmd.ExecuteScalar();
-                return result?.ToString(); 
+                return result?.ToString();
             }
         }
     }
