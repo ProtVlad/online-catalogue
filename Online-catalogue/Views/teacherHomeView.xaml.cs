@@ -21,14 +21,22 @@ namespace Online_catalogue.Views
     /// </summary>
     public partial class teacherHomeView : Window
     {
+        public ObservableCollection<Curs> Courses { get; set; }
         private User LoggedInUser { get; set; }
-        public ObservableCollection<Course> Courses { get; set; }
+
         public teacherHomeView(User user)
         {
             InitializeComponent();
             LoggedInUser = user;
             WelcomeTextBlock.Text = $"Bun venit, {LoggedInUser.Nume} {LoggedInUser.Prenume}!";
+            var db = new DatabaseService();
+            var cursuriDinDb = db.GetCourses();
+
+            Courses = new ObservableCollection<Curs>(cursuriDinDb);
+
+            DataContext = this;
         }
+
 
         private void AddCourse_Click(object sender, RoutedEventArgs e)
         {
@@ -44,11 +52,11 @@ namespace Online_catalogue.Views
         }
         private void Course_MouseDown(object sender, RoutedEventArgs e)
         {
-            var course = (sender as FrameworkElement).DataContext as Course;
+            var course = (sender as FrameworkElement).DataContext as Curs;
 
             if (course != null)
             {
-                courseDetailView courseDetailsWindow = new courseDetailView();
+                var courseDetailsWindow = new courseDetailView(course.Id);
                 courseDetailsWindow.ShowDialog();
             }
         }
@@ -58,9 +66,5 @@ namespace Online_catalogue.Views
             resetWindow.ShowDialog();
         }
     }
-    public class Course
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-    }
+
 }

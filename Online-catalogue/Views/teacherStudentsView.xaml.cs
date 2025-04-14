@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Online_catalogue.Models;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 
 namespace Online_catalogue.Views
@@ -13,22 +15,12 @@ namespace Online_catalogue.Views
 
         private void LoadStudents()
         {
-            List<Student> students = new List<Student>
-            {
-                new Student { Id = 1, LastName = "Popescu", FirstName = "Ana", Email = "ana.popescu@example.com" },
-                new Student { Id = 2, LastName = "Ionescu", FirstName = "Mihai", Email = "mihai.ionescu@example.com" },
-                new Student { Id = 3, LastName = "Dumitrescu", FirstName = "Elena", Email = "elena.dumitrescu@example.com" }
-            };
+            DatabaseService db = new DatabaseService();
+            List<User> studenti = db.GetUsers().Where(u => u.Rol == "elev").ToList();
 
-            StudentsDataGrid.ItemsSource = students;
+            StudentsDataGrid.ItemsSource = studenti;
         }
+
     }
 
-    public class Student
-    {
-        public int Id { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public string Email { get; set; }
-    }
 }

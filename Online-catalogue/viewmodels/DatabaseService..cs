@@ -224,4 +224,175 @@ public class DatabaseService
             }
         }
     }
+    public List<Nota> GetNote(int userId, int courseId)
+    {
+        List<Nota> note = new List<Nota>();
+
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "SELECT id, id_user, id_curs, nota FROM nota WHERE id_user = @userId AND id_curs = @courseId";
+
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@userId", userId);
+                cmd.Parameters.AddWithValue("@courseId", courseId);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        note.Add(new Nota
+                        {
+                            Id = reader.GetInt32(0),
+                            IdUser = reader.GetInt32(1),
+                            IdCurs = reader.GetInt32(2),
+                            NotaValoare = reader.GetInt32(3)
+                        });
+                    }
+                }
+            }
+        }
+
+        return note;
+    }
+
+    public List<Nota> GetNote(int courseId)
+    {
+        List<Nota> note = new List<Nota>();
+
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "SELECT id, id_user, id_curs, nota FROM nota WHERE id_curs = @courseId";
+
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@courseId", courseId);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        note.Add(new Nota
+                        {
+                            Id = reader.GetInt32(0),
+                            IdUser = reader.GetInt32(1),
+                            IdCurs = reader.GetInt32(2),
+                            NotaValoare = reader.GetInt32(3)
+                        });
+                    }
+                }
+            }
+        }
+
+        return note;
+    }
+
+
+    public void AddNota(Nota nota)
+    {
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "INSERT INTO nota (id_user, id_curs, nota) VALUES (@idUser, @idCurs, @nota)";
+
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@idUser", nota.IdUser);
+                cmd.Parameters.AddWithValue("@idCurs", nota.IdCurs);
+                cmd.Parameters.AddWithValue("@nota", nota.NotaValoare);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
+    public List<User> GetUsersByCourseId(int courseId)
+    {
+        List<User> users = new List<User>();
+
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = @"
+            SELECT u.id, u.nume, u.prenume, u.rol, u.parola, u.email 
+            FROM users u
+            JOIN user_curs uc ON u.id = uc.id_user
+            WHERE uc.id_curs = @courseId";
+
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@courseId", courseId);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        users.Add(new User
+                        {
+                            Id = reader.GetInt32(0),
+                            Nume = reader.GetString(1),
+                            Prenume = reader.GetString(2),
+                            Rol = reader.GetString(3),
+                            Parola = reader.GetString(4),
+                            Email = reader.GetString(5)
+                        });
+                    }
+                }
+            }
+        }
+
+        return users;
+    }
+
+    public List<Curs> GetCourses()
+    {
+        List<Curs> courses = new List<Curs>();
+
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "SELECT id, nume_curs, descriere FROM curs"; 
+
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        courses.Add(new Curs
+                        {
+                            Id = reader.GetInt32(0),           
+                            NumeCurs = reader.GetString(1),     
+                            Descriere = reader.GetString(2)   
+                        });
+                    }
+                }
+            }
+        }
+
+        return courses;
+    }
+
+    public string GetCourseName(int cursId)
+    {
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "SELECT NumeCurs FROM Curs WHERE Id = @Id";
+
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@Id", cursId);
+
+                var result = cmd.ExecuteScalar();
+                return result?.ToString();  // Returneaz� numele cursului
+            }
+        }
+    }
+
+   
+
+
 }

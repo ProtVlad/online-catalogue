@@ -99,6 +99,9 @@
     <Compile Include="Views\addCourseView.xaml.cs">
       <DependentUpon>addCourseView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\addGrade.xaml.cs">
+      <DependentUpon>addGrade.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\adminAddUserView.xaml.cs">
       <DependentUpon>adminAddUserView.xaml</DependentUpon>
     </Compile>
@@ -116,6 +119,9 @@
     </Compile>
     <Compile Include="Views\ResetPasswordView.xaml.cs">
       <DependentUpon>ResetPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\teacherAddStudent.xaml.cs">
+      <DependentUpon>teacherAddStudent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\teacherHomeView.xaml.cs">
       <DependentUpon>teacherHomeView.xaml</DependentUpon>
@@ -136,6 +142,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\addCourseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\addGrade.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,6 +170,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ResetPasswordView.xaml">
+    <SubType>Designer</SubType>
+    <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\teacherAddStudent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
