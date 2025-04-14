@@ -63,3 +63,5 @@ namespace Online_catalogue.Views
         }
     }
 }
+
+//nici asa nou clonat nu vrea

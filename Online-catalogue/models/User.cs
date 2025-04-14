@@ -14,5 +14,7 @@ namespace Online_catalogue.Models
         public string Rol { get; set; }
         public string Parola { get; set; }
         public string Email { get; set; }
+        public string NumeComplet { get; set; } 
+
     }
 }
