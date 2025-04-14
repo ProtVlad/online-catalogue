@@ -137,13 +137,13 @@ public class DatabaseService
     }
 
 
-    public void InsertUser(string nume, string prenume, string rol, string email, string parola, DateTime createdAt)
+    public void InsertUser(string nume, string prenume, string rol, string email, string parola)
     {
         using (var conn = new NpgsqlConnection(connectionString))
         {
             conn.Open();
-            string query = "INSERT INTO users (nume, prenume, rol, email, parola, created_at) " +
-                           "VALUES (@nume, @prenume, @rol, @email, @parola, @createdAt)";
+            string query = "INSERT INTO users (nume, prenume, rol, email, parola) " +
+                           "VALUES (@nume, @prenume, @rol, @email, @parola)";
 
             using (var cmd = new NpgsqlCommand(query, conn))
             {
@@ -152,7 +152,6 @@ public class DatabaseService
                 cmd.Parameters.AddWithValue("@rol", rol);
                 cmd.Parameters.AddWithValue("@email", email);
                 cmd.Parameters.AddWithValue("@parola", parola);
-                cmd.Parameters.AddWithValue("@createdAt", createdAt);
 
                 cmd.ExecuteNonQuery();
             }

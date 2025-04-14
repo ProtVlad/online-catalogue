@@ -16,19 +16,29 @@ using System.Windows.Shapes;
 namespace Online_catalogue.Views
 {
     /// <summary>
-    /// Interaction logic for adminAddUserView.xaml
+    /// Interacțiune pentru fereastra de adăugare a unui utilizator.
+    /// Permite unui administrator să adauge un utilizator în sistem.
     /// </summary>
     public partial class adminAddUserView : Window
     {
+        /// <summary>
+        /// Constructorul ferestrei de adăugare a utilizatorului.
+        /// Inițializează componentele vizuale ale ferestrei.
+        /// </summary>
         public adminAddUserView()
         {
             InitializeComponent();
         }
 
-
-
+        /// <summary>
+        /// Eveniment care se declanșează atunci când utilizatorul apasă butonul pentru a salva un nou utilizator.
+        /// Validază datele introduse și adaugă utilizatorul în baza de date.
+        /// </summary>
+        /// <param name="sender">Obiectul care a declanșat evenimentul (butonul de salvare a utilizatorului).</param>
+        /// <param name="e">Datele evenimentului.</param>
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            // Verifică dacă toate câmpurile sunt completate
             if (string.IsNullOrEmpty(LastNameTextBox.Text) ||
                 string.IsNullOrEmpty(FirstNameTextBox.Text) ||
                 RoleComboBox.SelectedItem == null ||
@@ -56,28 +66,34 @@ namespace Online_catalogue.Views
 
             try
             {
+                // Adaugă utilizatorul în baza de date
                 DatabaseService db = new DatabaseService();
-                db.InsertUser(nume, prenume, rol, email, parola, createdAt);
+                db.InsertUser(nume, prenume, rol, email, parola);
 
                 MessageBox.Show("Utilizator adăugat cu succes!", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
             catch (Exception ex)
             {
+                // Afișează eroare în cazul în care salvarea în baza de date eșuează
                 MessageBox.Show($"Eroare la salvare în baza de date:\n{ex.Message}", "Eroare", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            // Dacă totul este în regulă, închide fereastra
+            // Închide fereastra curentă
             this.Close();
         }
 
+        /// <summary>
+        /// Eveniment care se declanșează atunci când fereastra este închisă.
+        /// Deschide fereastra de administrare a utilizatorilor.
+        /// </summary>
+        /// <param name="sender">Obiectul care a declanșat evenimentul de închidere.</param>
+        /// <param name="e">Datele evenimentului de închidere.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Deschidem fereastra de Admin după ce se închide fereastra curentă
+            // Deschide fereastra adminView după ce fereastra curentă este închisă
             adminView adminViewWindow = new adminView();
             adminViewWindow.Show();  // Deschide fereastra adminView
         }
-
     }
-
 }

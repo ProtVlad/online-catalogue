@@ -17,16 +17,24 @@ using System.Windows.Shapes;
 namespace Online_catalogue.Views
 {
     /// <summary>
-    /// Interaction logic for adminView.xaml
+    /// Interacțiune pentru fereastra administratorului. 
+    /// Permite gestionarea utilizatorilor: adăugare, editare și ștergere.
     /// </summary>
     public partial class adminView : Window
     {
+        /// <summary>
+        /// Constructorul ferestrei administratorului.
+        /// Inițializează fereastra și încarcă utilizatorii.
+        /// </summary>
         public adminView()
         {
             InitializeComponent();
             LoadUsers();  // Adaugă această linie pentru a încărca utilizatorii
         }
 
+        /// <summary>
+        /// Încarcă lista de utilizatori din baza de date și o afișează în DataGrid.
+        /// </summary>
         private void LoadUsers()
         {
             DatabaseService dbService = new DatabaseService();
@@ -34,13 +42,24 @@ namespace Online_catalogue.Views
             UsersDataGrid.ItemsSource = users;
         }
 
+        /// <summary>
+        /// Deschide fereastra pentru adăugarea unui nou utilizator.
+        /// </summary>
+        /// <param name="sender">Obiectul care a declanșat evenimentul (butonul AddUser).</param>
+        /// <param name="e">Datele evenimentului.</param>
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
-             adminAddUserView adminAddUserView = new adminAddUserView();
+            adminAddUserView adminAddUserView = new adminAddUserView();
             this.Close();
             adminAddUserView.ShowDialog();
         }
 
+        /// <summary>
+        /// Deschide fereastra pentru editarea unui utilizator selectat din DataGrid.
+        /// Dacă nu este selectat niciun utilizator, se afișează un mesaj de eroare.
+        /// </summary>
+        /// <param name="sender">Obiectul care a declanșat evenimentul (butonul EditUser).</param>
+        /// <param name="e">Datele evenimentului.</param>
         private void EditUser_Click(object sender, RoutedEventArgs e)
         {
             if (UsersDataGrid.SelectedItem is User selectedUser)
@@ -57,6 +76,12 @@ namespace Online_catalogue.Views
             }
         }
 
+        /// <summary>
+        /// Șterge utilizatorul selectat din DataGrid după o confirmare.
+        /// Dacă utilizatorul are rolul "admin", ștergerea nu este permisă.
+        /// </summary>
+        /// <param name="sender">Obiectul care a declanșat evenimentul (butonul DeleteUser).</param>
+        /// <param name="e">Datele evenimentului.</param>
         private void DeleteUser_Click(object sender, RoutedEventArgs e)
         {
             if (UsersDataGrid.SelectedItem is User selectedUser)
