@@ -120,6 +120,9 @@
     <Compile Include="Views\ResetPasswordView.xaml.cs">
       <DependentUpon>ResetPasswordView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\studentCourseDetailsView.xaml.cs">
+      <DependentUpon>studentCourseDetailsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\studentHomeView.xaml.cs">
       <DependentUpon>studentHomeView.xaml</DependentUpon>
     </Compile>
@@ -173,6 +176,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ResetPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\studentCourseDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -427,6 +427,20 @@ public class DatabaseService
         return notes;
     }
 
+    public string GetCourseNameById(int courseId)
+    {
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "SELECT nume_curs FROM curs WHERE id = @id";
+
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@id", courseId);
+                return cmd.ExecuteScalar()?.ToString() ?? "N/A";
+            }
+        }
+    }
 
 
 
