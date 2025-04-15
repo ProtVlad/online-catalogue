@@ -1,5 +1,5 @@
 ﻿using Online_catalogue.Models;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -9,49 +9,51 @@ namespace Online_catalogue.Views
     public partial class teacherAddStudent : Window
     {
         private DatabaseService db;
-        private List<User> elevi;
-        private List<Curs> cursuri;
+        private int courseId;
 
-        public teacherAddStudent()
+        // Eveniment pentru a semnala că un student a fost adăugat
+        public event Action<User> StudentAdaugat;
+
+        public teacherAddStudent(int courseId)
         {
             InitializeComponent();
             db = new DatabaseService();
+            this.courseId = courseId;
             LoadData();
         }
 
         private void LoadData()
         {
-            // 1. Luăm toți elevii
-            elevi = db.GetUsers().Where(u => u.Rol == "elev").ToList();
+            // Obținem elevii care nu sunt deja înscriși la cursul curent
+            var eleviDisponibili = db.GetEleviDisponibili(courseId);
 
-            // Creăm un câmp nou pentru afișare ușoară
-            foreach (var elev in elevi)
+            // Creăm un câmp pentru afișare ușoară (Nume complet)
+            foreach (var elev in eleviDisponibili)
             {
                 elev.NumeComplet = $"{elev.Prenume} {elev.Nume}";
             }
 
-            StudentComboBox.ItemsSource = elevi;
-
-            // 2. Luăm toate cursurile
-            cursuri = db.GetCourses(); // presupunem că această metodă există
-            CourseComboBox.ItemsSource = cursuri;
+            // Setăm lista de elevi în ComboBox
+            StudentComboBox.ItemsSource = eleviDisponibili;
         }
 
-        private void AdaugaStudentLaCurs_Click(object sender, RoutedEventArgs e)
+        private void AdaugaStudent_Click(object sender, RoutedEventArgs e)
         {
             var studentSelectat = StudentComboBox.SelectedItem as User;
-            var cursSelectat = CourseComboBox.SelectedItem as Curs;
 
-            if (studentSelectat == null || cursSelectat == null)
+            if (studentSelectat == null)
             {
-                MessageBox.Show("Te rog selectează un student și un curs.", "Eroare", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Te rog selectează un student.", "Eroare", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            // Salvăm asocierea în baza de date
-          //  db.AddUserToCourse(studentSelectat.Id, cursSelectat.Id);
+            // Salvează asocierea în baza de date (în `user_curs`)
+            db.AddUserToCourse(studentSelectat.Id, courseId);
 
-            MessageBox.Show($"Studentul {studentSelectat.Prenume} {studentSelectat.Nume} a fost adăugat la cursul {cursSelectat.NumeCurs}.", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
+            // Emitere eveniment de adăugare student
+            StudentAdaugat?.Invoke(studentSelectat); // Aici emitem evenimentul cu studentul
+
+            // Închide fereastra după adăugare
             this.Close();
         }
     }

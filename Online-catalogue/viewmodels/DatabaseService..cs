@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Runtime.Remoting.Contexts;
 using System.Windows;
 using Npgsql;
@@ -442,7 +443,292 @@ public class DatabaseService
         }
     }
 
+    public void AddCourse(Curs course)
+    {
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "INSERT INTO curs (nume_curs, descriere) VALUES (@numeCurs, @descriere) RETURNING id";
 
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@numeCurs", course.NumeCurs);
+                cmd.Parameters.AddWithValue("@descriere", (object)course.Descriere ?? DBNull.Value);
+
+                // Executa comanda si ia id-ul cursului nou creat
+                course.Id = (int)cmd.ExecuteScalar(); // Id-ul cursului va fi returnat de DB
+            }
+        }
+    }
+
+    // Leaga profesorul de curs în tabela user_curs
+    public void AddUserCourseLink(int professorId, int courseId)
+    {
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "INSERT INTO user_curs (id_user, id_curs) VALUES (@idUser, @idCurs)";
+
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@idUser", professorId);
+                cmd.Parameters.AddWithValue("@idCurs", courseId);
+
+                cmd.ExecuteNonQuery(); // Adauga legatura
+            }
+        }
+    }
+
+    public void DeleteCourse(int courseId)
+    {
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+
+            using (var cmd = new NpgsqlCommand())
+            {
+                cmd.Connection = conn;
+
+                cmd.CommandText = "DELETE FROM nota WHERE id_curs = @id";
+                cmd.Parameters.AddWithValue("id", courseId);
+                cmd.ExecuteNonQuery();
+
+                cmd.CommandText = "DELETE FROM user_curs WHERE id_curs = @id";
+                cmd.ExecuteNonQuery();
+
+                cmd.CommandText = "DELETE FROM curs WHERE id = @id";
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
+    public Curs GetCourseById(int courseId)
+    {
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "SELECT id, nume_curs, descriere FROM curs WHERE id = @id";
+
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("id", courseId);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return new Curs
+                        {
+                            Id = reader.GetInt32(0),
+                            NumeCurs = reader.GetString(1),
+                            Descriere = reader.GetString(2)
+                        };
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+        }
+    }
+
+    public void UpdateCourse(Curs course)
+    {
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+
+            string query = "UPDATE curs SET nume_curs = @nume, descriere = @descriere WHERE id = @id";
+
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("nume", course.NumeCurs);
+                cmd.Parameters.AddWithValue("descriere", course.Descriere);
+                cmd.Parameters.AddWithValue("id", course.Id);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected == 0)
+                {
+                    throw new Exception("Cursul nu a fost gasit sau nu s-a putut actualiza.");
+                }
+            }
+        }
+    }
+
+    public List<Curs> GetCoursesForTeacher(int teacherId)
+    {
+        var courses = new List<Curs>();
+
+        using (var connection = new NpgsqlConnection(connectionString))
+        {
+            connection.Open();
+
+            string query = @"
+            SELECT c.id, c.nume_curs, c.descriere 
+            FROM curs c
+            JOIN user_curs uc ON c.id = uc.id_curs
+            WHERE uc.id_user = @teacherId";
+
+            using (var cmd = new NpgsqlCommand(query, connection))
+            {
+                cmd.Parameters.AddWithValue("teacherId", teacherId);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var curs = new Curs
+                        {
+                            Id = reader.GetInt32(0),
+                            NumeCurs = reader.GetString(1),
+                            Descriere = reader.GetString(2)
+                        };
+
+                        courses.Add(curs);
+                    }
+                }
+            }
+        }
+
+        return courses;
+    }
+
+    public List<User> GetEleviPentruCurs(int idCurs)
+    {
+        var elevi = new List<User>();
+
+        using (var connection = new NpgsqlConnection(connectionString))
+        {
+            connection.Open();
+
+            var query = @"
+            SELECT u.id, u.nume, u.prenume, u.email, u.rol
+            FROM users u
+            INNER JOIN user_curs uc ON u.id = uc.id_user
+            WHERE uc.id_curs = @idCurs AND u.rol = 'elev'
+        ";
+
+            using (var command = new NpgsqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@idCurs", idCurs);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        elevi.Add(new User
+                        {
+                            Id = reader.GetInt32(0),
+                            Nume = reader.GetString(1),
+                            Prenume = reader.GetString(2),
+                            Email = reader.GetString(3),
+                            Rol = reader.GetString(4)
+                        });
+                    }
+                }
+            }
+        }
+
+        return elevi;
+    }
+
+    public void AddUserToCourse(int userId, int courseId)
+    {
+        using (var connection = new NpgsqlConnection(connectionString))
+        {
+            connection.Open();
+
+            using (var cmd = new NpgsqlCommand("INSERT INTO user_curs (id_user, id_curs) VALUES (@userId, @courseId)", connection))
+            {
+                cmd.Parameters.AddWithValue("@userId", userId);
+                cmd.Parameters.AddWithValue("@courseId", courseId);
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
+    public List<User> GetEleviDisponibili(int cursId)
+    {
+        using (var connection = new NpgsqlConnection(connectionString))
+        {
+            try
+            {
+                connection.Open();
+
+                var sql = @"SELECT * 
+                            FROM users 
+                            WHERE rol = 'elev' AND id NOT IN 
+                                (SELECT id_user FROM user_curs WHERE id_curs = @cursId)";
+
+                using (var command = new NpgsqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@cursId", cursId);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        var eleviDisponibili = new List<User>();
+
+                        while (reader.Read())
+                        {
+                            eleviDisponibili.Add(new User
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("id")),
+                                Nume = reader.GetString(reader.GetOrdinal("nume")),
+                                Prenume = reader.GetString(reader.GetOrdinal("prenume")),
+                                Email = reader.GetString(reader.GetOrdinal("email")),
+                                Rol = reader.GetString(reader.GetOrdinal("rol")),
+                            });
+                        }
+
+                        return eleviDisponibili;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Eroare la conectarea la baza de date: {ex.Message}");
+                return new List<User>(); 
+            }
+        }
+    }
+
+    public void RemoveStudentFromCourse(int studentId, int cursId)
+    {
+        using (var connection = new NpgsqlConnection(connectionString))
+        {
+            try
+            {
+                connection.Open();
+
+                var deleteNotesSql = @"DELETE FROM nota
+                                   WHERE id_user = @studentId AND id_curs = @cursId";
+
+                using (var deleteNotesCommand = new NpgsqlCommand(deleteNotesSql, connection))
+                {
+                    deleteNotesCommand.Parameters.AddWithValue("@studentId", studentId);
+                    deleteNotesCommand.Parameters.AddWithValue("@cursId", cursId);
+
+                    deleteNotesCommand.ExecuteNonQuery();
+                }
+
+                var deleteCourseSql = @"DELETE FROM user_curs 
+                                   WHERE id_user = @studentId AND id_curs = @cursId";
+
+                using (var deleteCourseCommand = new NpgsqlCommand(deleteCourseSql, connection))
+                {
+                    deleteCourseCommand.Parameters.AddWithValue("@studentId", studentId);
+                    deleteCourseCommand.Parameters.AddWithValue("@cursId", cursId);
+
+                    deleteCourseCommand.ExecuteNonQuery();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Eroare la stergerea studentului din curs: {ex.Message}");
+            }
+        }
+    }
 
 
 }
