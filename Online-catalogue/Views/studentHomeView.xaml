@@ -48,25 +48,28 @@
                        FontSize="22" FontWeight="Bold" Foreground="Black"
                        HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
-			<TextBlock FontSize="16" FontWeight="SemiBold" Foreground="DarkBlue">
-				<Run Text="Media generală: "/>
-				<Run Text="{Binding MediaGenerala, StringFormat=F2}" />
-			</TextBlock>
+            <TextBlock FontSize="16" FontWeight="SemiBold" Foreground="DarkBlue">
+    <Run Text="Media generală: "/>
+    <Run Text="{Binding MediaGenerala, StringFormat=F2}" />
+            </TextBlock>
 
-			<ItemsControl ItemsSource="{Binding StudentCourses}" Margin="0,10,0,0">
-				<ItemsControl.ItemTemplate>
-					<DataTemplate>
-						<Border BorderBrush="LightGray" BorderThickness="1" Margin="5" Padding="10" Background="White">
-							<StackPanel>
-								<TextBlock Text="{Binding NumeCurs}" FontSize="16" FontWeight="Bold" Foreground="Black"/>
-								<TextBlock Text="{Binding Descriere}" FontSize="14" Foreground="DarkGray"/>
-								<Button Content="Vezi detalii" Style="{StaticResource StyledButton}" Margin="0,10,0,0" HorizontalAlignment="Center" Click="Course_Click"/>
-							</StackPanel>
-						</Border>
-					</DataTemplate>
-				</ItemsControl.ItemTemplate>
-			</ItemsControl>
+            <!-- ScrollViewer adăugat -->
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Height="250" Margin="0,10,0,0">
+                <ItemsControl ItemsSource="{Binding StudentCourses}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="LightGray" BorderThickness="1" Margin="5" Padding="10" Background="White">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding NumeCurs}" FontSize="16" FontWeight="Bold" Foreground="Black"/>
+                                    <TextBlock Text="{Binding Descriere}" FontSize="14" Foreground="DarkGray"/>
+                                    <Button Content="Vezi detalii" Style="{StaticResource StyledButton}" Margin="0,10,0,0" HorizontalAlignment="Center" Click="Course_Click"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
 
-		</StackPanel>
+        </StackPanel>
 	</Grid>
 </Window>

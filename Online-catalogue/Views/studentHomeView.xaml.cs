@@ -43,7 +43,7 @@ namespace Online_catalogue.Views
 
             // Obține cursurile din baza de date
             var db = new DatabaseService();
-            var cursuriDinDb = db.GetCourses();
+            var cursuriDinDb = db.GetCoursesByUserId(user.Id);
 
             // Populează colecția de cursuri
             StudentCourses = new ObservableCollection<Curs>(cursuriDinDb);
