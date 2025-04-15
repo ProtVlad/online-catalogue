@@ -16,16 +16,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up .NET Core
+    - name: Set up .NET
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: '6.0' # Schimbă cu versiunea ta de .NET, de ex. '5.0', '6.0', etc.
+        dotnet-version: '6.0' # Schimbă cu versiunea ta de .NET
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore Online-catalogue/Online-catalogue.csproj
 
-    - name: Build
-      run: dotnet build --configuration Release
+    - name: Build project
+      run: dotnet build Online-catalogue/Online-catalogue.csproj --configuration Release
 
     - name: Run tests
-      run: dotnet test --configuration Release
+      run: dotnet test OnlineCatalogue.Tests/OnlineCatalogue.Tests.csproj --configuration Release
