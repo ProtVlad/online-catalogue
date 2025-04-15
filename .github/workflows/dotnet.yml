@@ -16,6 +16,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Install Mono (for .NET Framework 4.7.2 support)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y mono-complete
+
     - name: Set up .NET
       uses: actions/setup-dotnet@v2
       with:
