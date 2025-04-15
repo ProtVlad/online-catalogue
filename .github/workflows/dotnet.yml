@@ -1,0 +1,31 @@
+name: .NET Build and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.0' # Schimbă cu versiunea ta de .NET, de ex. '5.0', '6.0', etc.
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release
+
+    - name: Run tests
+      run: dotnet test --configuration Release
