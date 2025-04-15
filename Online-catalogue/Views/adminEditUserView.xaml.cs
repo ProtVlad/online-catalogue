@@ -17,12 +17,21 @@ using System.Windows.Shapes;
 namespace Online_catalogue.Views
 {
     /// <summary>
-    /// Interaction logic for adminEditUserView.xaml
+    /// Interacțiune pentru fereastra de editare a unui utilizator.
+    /// Permite administratorului să editeze datele unui utilizator selectat.
     /// </summary>
     public partial class adminEditUserView : Window
     {
+        /// <summary>
+        /// Reprezintă utilizatorul selectat pentru editare.
+        /// </summary>
         private User _selectedUser;
 
+        /// <summary>
+        /// Constructorul ferestrei de editare a unui utilizator.
+        /// Inițializează câmpurile ferestrei cu datele utilizatorului selectat.
+        /// </summary>
+        /// <param name="user">Utilizatorul care urmează să fie editat.</param>
         public adminEditUserView(User user)
         {
             InitializeComponent();
@@ -37,6 +46,12 @@ namespace Online_catalogue.Views
             PasswordBox.Password = _selectedUser.Parola;
         }
 
+        /// <summary>
+        /// Eveniment care se declanșează atunci când utilizatorul apasă butonul pentru a salva modificările.
+        /// Verifică dacă câmpurile sunt completate și validează datele înainte de a salva.
+        /// </summary>
+        /// <param name="sender">Obiectul care a declanșat evenimentul (butonul de salvare).</param>
+        /// <param name="e">Datele evenimentului.</param>
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             // Validarea câmpurilor
@@ -97,7 +112,5 @@ namespace Online_catalogue.Views
                 MessageBox.Show($"Eroare la actualizarea utilizatorului:\n{ex.Message}", "Eroare", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
     }
-
 }

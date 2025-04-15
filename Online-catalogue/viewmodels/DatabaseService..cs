@@ -74,6 +74,24 @@ public class DatabaseService
                     cmd.ExecuteNonQuery();
                 }
 
+                string checkUsersQuery = "SELECT COUNT(*) FROM users;";
+                using (var checkCmd = new NpgsqlCommand(checkUsersQuery, conn))
+                {
+                    var userCount = (long)checkCmd.ExecuteScalar();
+                    if (userCount == 0)
+                    {
+                        string insertAdminQuery = @"
+                            INSERT INTO users (nume, prenume, rol, parola, email)
+                            VALUES ('Admin', 'Principal', 'admin', 'admin123', 'admin@example.com');";
+
+                        using (var insertCmd = new NpgsqlCommand(insertAdminQuery, conn))
+                        {
+                            insertCmd.ExecuteNonQuery();
+                        }
+
+                    }
+                }
+
                 MessageBox.Show("Conexiune reusita!", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
@@ -120,13 +138,13 @@ public class DatabaseService
     }
 
 
-    public void InsertUser(string nume, string prenume, string rol, string email, string parola, DateTime createdAt)
+    public void InsertUser(string nume, string prenume, string rol, string email, string parola)
     {
         using (var conn = new NpgsqlConnection(connectionString))
         {
             conn.Open();
-            string query = "INSERT INTO users (nume, prenume, rol, email, parola, created_at) " +
-                           "VALUES (@nume, @prenume, @rol, @email, @parola, @createdAt)";
+            string query = "INSERT INTO users (nume, prenume, rol, email, parola) " +
+                           "VALUES (@nume, @prenume, @rol, @email, @parola)";
 
             using (var cmd = new NpgsqlCommand(query, conn))
             {
@@ -135,7 +153,6 @@ public class DatabaseService
                 cmd.Parameters.AddWithValue("@rol", rol);
                 cmd.Parameters.AddWithValue("@email", email);
                 cmd.Parameters.AddWithValue("@parola", parola);
-                cmd.Parameters.AddWithValue("@createdAt", createdAt);
 
                 cmd.ExecuteNonQuery();
             }
@@ -390,7 +407,7 @@ public class DatabaseService
                 cmd.Parameters.AddWithValue("@Id", cursId);
 
                 var result = cmd.ExecuteScalar();
-                return result?.ToString(); 
+                return result?.ToString();
             }
         }
     }
