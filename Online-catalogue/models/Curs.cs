@@ -1,15 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
-namespace Online_catalogue.Models
+public class Curs : INotifyPropertyChanged
 {
-    public class Curs
+    private string _numeCurs;
+    private string _descriere;
+
+    public int Id { get; set; }
+
+    public string NumeCurs
     {
-        public int Id { get; set; }
-        public string NumeCurs { get; set; }
-        public string Descriere { get; set; }
+        get => _numeCurs;
+        set
+        {
+            if (_numeCurs != value)
+            {
+                _numeCurs = value;
+                OnPropertyChanged(nameof(NumeCurs)); // Notify UI
+            }
+        }
+    }
+
+    public string Descriere
+    {
+        get => _descriere;
+        set
+        {
+            if (_descriere != value)
+            {
+                _descriere = value;
+                OnPropertyChanged(nameof(Descriere)); // Notify UI
+            }
+        }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Online_catalogue.Models;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Online_catalogue.Views
 {
@@ -20,13 +10,16 @@ namespace Online_catalogue.Views
     /// </summary>
     public partial class addCourseView : Window
     {
+        private int ProfessorId { get; set; }
+        
         /// <summary>
         /// Constructorul ferestrei de adăugare a cursului.
         /// Inițializează componentele vizuale ale ferestrei.
         /// </summary>
-        public addCourseView()
+        public addCourseView(int professorId)
         {
             InitializeComponent();
+            ProfessorId = professorId;
         }
 
         /// <summary>
@@ -46,9 +39,27 @@ namespace Online_catalogue.Views
                 return;
             }
 
-            // Afișează un mesaj de succes dacă cursul a fost salvat cu succes
+            // Crearea obiectului Curs
+            var newCourse = new Curs
+            {
+                NumeCurs = NameTextBox.Text,
+                Descriere = DescriptionTextBox.Text
+            };
+
+            // Salvarea cursului în baza de date
+            var db = new DatabaseService();
+            db.AddCourse(newCourse); // Adăugăm cursul în DB și obținem id-ul
+
+            // Salvarea legăturii între profesor și curs în tabela user_curs
+            db.AddUserCourseLink(ProfessorId, newCourse.Id); // Legăm profesorul de curs
+
             MessageBox.Show("Cursul a fost salvat cu succes!", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            // Închidem fereastra și returnăm true pentru succes
+            this.DialogResult = true;
             this.Close();
         }
+
+
     }
 }

@@ -46,11 +46,17 @@
                 <DataGridTextColumn Header="Prenume" Binding="{Binding Prenume}" Width="*"/>
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
                 <DataGridTextColumn Header="Note" Binding="{Binding NoteConcatenate}" Width="2*"/>
-                <DataGridTemplateColumn Header="Acțiuni" Width="150">
+                <DataGridTemplateColumn Header="Acțiuni" Width="200">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Adaugă notă" Style="{StaticResource StyledButton}" 
-                            Click="AdaugaNota_Click"/>
+                            <StackPanel Orientation="Horizontal">
+                                <!-- Butonul Adaugă notă -->
+                                <Button Content="Adaugă notă" Style="{StaticResource StyledButton}" 
+                        Click="AdaugaNota_Click" Width="100" Margin="0,5,0,0"/>
+                                <!-- Butonul Șterge -->
+                                <Button Content="Șterge" Style="{StaticResource StyledButton}" 
+                        Click="StergeStudent_Click" Width="100" Margin="0,5,0,0"/>
+                            </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

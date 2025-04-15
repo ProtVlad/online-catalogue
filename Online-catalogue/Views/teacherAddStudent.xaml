@@ -13,13 +13,9 @@
             <ComboBox x:Name="StudentComboBox" Width="250" Margin="5"
                       DisplayMemberPath="NumeComplet"/>
 
-            <Label Content="Curs:"/>
-            <ComboBox x:Name="CourseComboBox" Width="250" Margin="5"
-                      DisplayMemberPath="Nume"/>
-
             <Button Content="Adaugă" Width="100" Height="30" HorizontalAlignment="Center" Margin="10"
                     Background="#3498db" Foreground="White" BorderBrush="#2980b9" BorderThickness="1"
-                    Click="AdaugaStudentLaCurs_Click">
+                    Click="AdaugaStudent_Click">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="#3498db"/>

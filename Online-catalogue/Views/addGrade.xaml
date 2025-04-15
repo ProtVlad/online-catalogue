@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Online_catalogue.Views.addGrade"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Adaugă Notă" Height="300" Width="400" Background="LightGray"
+        Title="Adaugă Notă" Height="500" Width="400" Background="LightGray"
         WindowStartupLocation="CenterScreen">
 
     <Grid Margin="20">
