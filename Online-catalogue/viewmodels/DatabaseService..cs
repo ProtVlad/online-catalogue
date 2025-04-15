@@ -365,6 +365,42 @@ public class DatabaseService
         return users;
     }
 
+    public List<Curs> GetCoursesByUserId(int userId)
+    {
+        List<Curs> cursuri = new List<Curs>();
+
+        using (var conn = new NpgsqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = @"
+        SELECT c.id, c.nume_curs, c.descriere
+        FROM curs c
+        JOIN user_curs uc ON c.id = uc.id_curs
+        WHERE uc.id_user = @userId";
+
+            using (var cmd = new NpgsqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@userId", userId);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        cursuri.Add(new Curs
+                        {
+                            Id = reader.GetInt32(0),
+                            NumeCurs = reader.GetString(1),
+                            Descriere = reader.IsDBNull(2) ? null : reader.GetString(2)
+                        });
+                    }
+                }
+            }
+        }
+
+        return cursuri;
+    }
+
+
     public List<Curs> GetCourses()
     {
         List<Curs> courses = new List<Curs>();
